@@ -12,8 +12,8 @@
 
 請打開終端機，依照以下步驟建立 `ssl-singer-identity` 虛擬環境並安裝所需套件。
 
-> 💡 **重要環境修復提醒：**
-> 由於 PyTorch Lightning 的套件依賴問題，我們必須強制降級 `pydantic`，並手動補齊 NVIDIA 編譯庫，否則在讀取 Checkpoint 或計算 GPU 頻譜圖時會發生崩潰。
+> 💡 **重要提醒：**
+> 我不保證環境能用。
 
 ```bash
 # 1. 建立虛擬環境 (建議 Python 3.10)
@@ -74,9 +74,21 @@ python train.py \
 
 訓練完成後，我們可以直接針對特定資料集計算 **EER (Equal Error Rate)** 與 **MNR (Mean Normalized Rank)**。
 
-baseline : "/home/jhao/ssl-singer-identity-master專題/logs/byol/version_0/checkpoints/best-eer-baseline-epoch=194-step=49725.ckpt"
-OD : "/home/jhao/ssl-singer-identity-master專題/logs/byol/version_2/checkpoints/best-eer-baseline-epoch=190-step=48705.ckpt"
-AOD : "/home/jhao/ssl-singer-identity-master專題/logs/byol/version_4/checkpoints/best-eer-baseline-epoch=197-step=50490.ckpt"：
+### 🔖 權重路徑
+
+| 實驗方法 | 權重檔案路徑 |
+|----------|--------------|
+| Baseline | `/home/jhao/ssl-singer-identity-master專題/logs/byol/version_0/checkpoints/best-eer-baseline-epoch=194-step=49725.ckpt` |
+| OD       | `/home/jhao/ssl-singer-identity-master專題/logs/byol/version_2/checkpoints/best-eer-baseline-epoch=190-step=48705.ckpt` |
+| AOD      | `/home/jhao/ssl-singer-identity-master專題/logs/byol/version_4/checkpoints/best-eer-baseline-epoch=197-step=50490.ckpt` |
+
+### 📂 評估資料集
+
+- `NUS-48E_renamed_split_4s`
+- `vocalset_renamed_split_4s`
+- `m4singer_renamed_split_4s`
+- `VCTK_renamed_split_4s`
+
 
 ```bash
 python eval_project.py \
