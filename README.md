@@ -1,6 +1,6 @@
 # 🎤 Singer Identity Representation Learning 
 
-這是一個基於自監督學習（Self-Supervised Learning, SSL）的歌手音色提取專題。本專案基於 ISMIR 2024 論文 [*Singer Identity Representation Learning using Self-supervised techniques*](https://arxiv.org/abs/2401.05064) 所提出的 BYOL 架構進行改良。
+這是一個基於自監督學習（Self-Supervised Learning, SSL）的歌手音色提取專題。本專案基於 ISMIR 2023 論文 [*Singer Identity Representation Learning using Self-supervised techniques*](https://arxiv.org/abs/2401.05064) 所提出的 BYOL 架構進行改良。
 
 我們使用 **EfficientNet-B0** 作為骨幹網路，並導入了我們實作的 **正交解耦 (Orthogonal Disentanglement, OD)** 與 **非對稱局部裁切 (Asymmetric Orthogonal Disentanglement, AOD)** 機制，旨在剝離演唱技巧與雜訊，提取出最純淨的歌手物理音色。
 
@@ -41,11 +41,14 @@ pip install --force-reinstall nvidia-cuda-nvrtc-cu12
 
 ## 🗂️ 資料集準備 (Dataset Preparation)
 
-本專案使用以下資料集進行訓練與測試，所有音檔皆統一處理為 `44.1kHz` 或 `16kHz` 的 `.wav` 格式：
+本專案使用以下資料集進行訓練與測試，所有音檔皆統一處理為 `44.1kHz` 的 `.wav` 格式：
 
 * **訓練集 (Training Set):** `STraDa Dataset`
   * 經過 Mel-RoFormer 人聲分離與 VAD 靜音過濾，共包含 4,529 位歌手、總長約 144 小時的高音質純淨人聲。
 * **評估集 (Evaluation Sets):** * `NUS-48E` (測試同個人的說話與唱歌)、`M4Singer` (中文流行)、`VocalSet` (極端唱腔技巧)、`VCTK` (純語音基準)。
+
+> 💡 **重要提醒：**
+> 資料集檔案太大所以沒有放在final_project裡面。
 
 <br>
 
@@ -59,7 +62,7 @@ pip install --force-reinstall nvidia-cuda-nvrtc-cu12
 
 ```bash
 # 指定使用第 0 張 GPU 進行訓練，避免共用伺服器時的資源衝突
-CUDA_VISIBLE_DEVICES=0 python train.py \
+python train.py \
     --config singer_identity/train_configs/efficientnet.yaml \
     --config singer_identity/train_configs/byol.yaml
 ```
