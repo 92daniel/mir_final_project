@@ -61,14 +61,10 @@ pip install --force-reinstall nvidia-cuda-nvrtc-cu12
 請在專案根目錄下執行以下指令開始訓練：
 
 ```bash
-# 指定使用第 0 張 GPU 進行訓練，避免共用伺服器時的資源衝突
 python train.py \
     --config singer_identity/train_configs/efficientnet.yaml \
     --config singer_identity/train_configs/byol.yaml
 ```
-
-> 💡 **訓練提示：**
-> 訓練過程中，PyTorch Lightning 會自動將最佳的 Checkpoint 儲存在 `logs/byol/version_X/checkpoints/` 目錄下。我們設定了 `monitor: "loss/val"` 來確保存下表現最穩定（Loss 最低）的模型權重。
 
 <br>
 
@@ -78,7 +74,9 @@ python train.py \
 
 訓練完成後，我們可以直接針對特定資料集計算 **EER (Equal Error Rate)** 與 **MNR (Mean Normalized Rank)**。
 
-以下指令將載入我們訓練好的模型權重（例如 Epoch 197 的 Checkpoint），並在 `NUS-48E_read_4s16_filtered` 測試集上進行評估：
+baseline : "/home/jhao/ssl-singer-identity-master專題/logs/byol/version_0/checkpoints/best-eer-baseline-epoch=194-step=49725.ckpt"
+OD : "/home/jhao/ssl-singer-identity-master專題/logs/byol/version_2/checkpoints/best-eer-baseline-epoch=190-step=48705.ckpt"
+AOD : "/home/jhao/ssl-singer-identity-master專題/logs/byol/version_4/checkpoints/best-eer-baseline-epoch=197-step=50490.ckpt"：
 
 ```bash
 python eval_project.py \
