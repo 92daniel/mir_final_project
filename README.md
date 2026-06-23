@@ -115,4 +115,4 @@ python eval_project.py \
 ---
 
 ## 📊 實驗結果紀錄 (Results)
-執行完 `eval_project.py` 後，程式會自動將該資料集的 EER 與 Rank 成績匯出並附加到 `metadata_dir` 下的 CSV 檔案中（例如 `eer_123.csv` 與 `rank_123.csv`），方便您直接統整到論文或專題報告的圖表中。
+執行完 `eval_project.py` 後，程式會自動將該資料集的 EER 與 Rank 成績匯出並附加到 `metadata_dir` 下的 CSV 檔案中（例如 `eer_123.csv` 與 `rank_123.csv`）。
